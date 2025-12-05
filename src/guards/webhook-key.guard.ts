@@ -28,7 +28,6 @@ export class WebhookKeyGuard implements CanActivate {
     const body = request.body as { key?: string } | undefined;
     const providedKey =
       (request.headers['x-webhook-key'] as string | undefined) ||
-      (request.headers['webhook-key'] as string | undefined) ||
       query?.key ||
       body?.key;
 
@@ -36,11 +35,11 @@ export class WebhookKeyGuard implements CanActivate {
     const expectedKey =
       typeof requiredKey === 'string'
         ? requiredKey
-        : process.env.WEBHOOK_KEY || process.env.ZOHO_WEBHOOK_KEY;
+        : process.env.ZOHO_WEBHOOK_KEY;
 
     if (!expectedKey) {
       throw new UnauthorizedException(
-        'Webhook key is not configured. Please set WEBHOOK_KEY or ZOHO_WEBHOOK_KEY environment variable.',
+        'Webhook key is not configured. Please set ZOHO_WEBHOOK_KEY environment variable.',
       );
     }
 

@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "node-terminal",
+      "name": "START DEV",
+      "request": "launch",
+      "command": "yarn run start:dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
       "name": "START",
       "request": "launch",
       "command": "yarn run start",
