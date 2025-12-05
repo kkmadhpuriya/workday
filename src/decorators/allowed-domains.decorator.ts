@@ -5,9 +5,9 @@ import { WebhookKey } from './webhook-key.decorator';
 
 export const ALLOWED_DOMAINS_METADATA = 'allowedDomains';
 
-export const AllowedDomains = (...domains: string[]) =>
+export const AllowedAccess = (key: string, ...domains: string[]) =>
   applyDecorators(
-    WebhookKey(),
+    WebhookKey(key),
     SetMetadata(ALLOWED_DOMAINS_METADATA, domains),
     UseGuards(WebhookKeyGuard, DomainRestrictionGuard),
   );
