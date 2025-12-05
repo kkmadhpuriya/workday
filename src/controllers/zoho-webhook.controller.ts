@@ -6,14 +6,12 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import { WebhookKey } from '../decorators/webhook-key.decorator';
 import { AllowedDomains } from '../decorators/allowed-domains.decorator';
 
 @Controller('webhooks/zoho')
 export class ZohoWebhookController {
   @Post()
   @HttpCode(HttpStatus.OK)
-  @WebhookKey()
   @AllowedDomains('zoho.com', 'zoho.in', 'zoho.eu')
   receiveWebhook(
     @Body() body: Record<string, unknown>,
@@ -39,7 +37,6 @@ export class ZohoWebhookController {
 
   @Post('summit')
   @HttpCode(HttpStatus.OK)
-  @WebhookKey()
   @AllowedDomains('zoho.com', 'zoho.in', 'zoho.eu')
   receiveSummitWebhook(
     @Body() body: Record<string, unknown>,
