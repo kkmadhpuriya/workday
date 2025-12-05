@@ -17,7 +17,6 @@ export class ZohoWebhookController {
     @Body() body: Record<string, unknown>,
     @Headers() headers: Record<string, string>,
   ) {
-    // Process the webhook data
     console.log('Received Zoho webhook:', {
       body,
       headers: {
@@ -27,7 +26,6 @@ export class ZohoWebhookController {
       },
     });
 
-    // Add your webhook processing logic here
     return {
       success: true,
       message: 'Webhook received successfully',
@@ -42,7 +40,6 @@ export class ZohoWebhookController {
     @Body() body: Record<string, unknown>,
     @Headers() headers: Record<string, string>,
   ) {
-    // Process the Summit webhook data
     console.log('Received Zoho Summit webhook:', {
       body,
       headers: {
@@ -52,7 +49,6 @@ export class ZohoWebhookController {
       },
     });
 
-    // Add your Summit webhook processing logic here
     return {
       success: true,
       message: 'Summit webhook received successfully',

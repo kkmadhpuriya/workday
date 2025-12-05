@@ -18,7 +18,6 @@ export class WebhookKeyGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );
 
-    // If decorator is not used, allow access
     if (!requiredKey) {
       return true;
     }
@@ -31,7 +30,6 @@ export class WebhookKeyGuard implements CanActivate {
       query?.key ||
       body?.key;
 
-    // Get the expected key from environment or use the one from decorator
     const expectedKey =
       typeof requiredKey === 'string'
         ? requiredKey
