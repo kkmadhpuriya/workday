@@ -18,24 +18,71 @@ export class ZohoWebhookController {
     'zoho.in',
     'zoho.eu',
   )
-  receiveWebhook(
-    @Body() body: Record<string, unknown>,
+  async receiveWebhook(
+    @Body() body: { requests: { request_status: string } },
     @Headers() headers: Record<string, string>,
   ) {
-    console.log('Received Zoho webhook:', {
-      body,
-      headers: {
-        'x-webhook-key': headers['x-webhook-key'],
-        origin: headers.origin,
-        referer: headers.referer,
-      },
-    });
+    // console.log('Received Zoho webhook:', {
+    //   body,
+    //   headers: {
+    //     'x-webhook-key': headers['x-webhook-key'],
+    //     origin: headers.origin,
+    //     referer: headers.referer,
+    //   },
+    // });
 
-    return {
-      success: true,
-      message: 'Webhook received successfully',
-      timestamp: new Date().toISOString(),
-    };
+    const requests = body.requests;
+    if (!requests) {
+      return {
+        success: false,
+        message: 'Request is required',
+        timestamp: new Date().toISOString(),
+      };
+    }
+
+    if (!requests.request_status) {
+      return {
+        success: false,
+        message: 'Request status is required',
+        timestamp: new Date().toISOString(),
+      };
+    }
+
+    const requestStatus = requests.request_status;
+    if (requestStatus !== 'completed') {
+      return {
+        success: false,
+        message: 'Request status is not completed',
+        timestamp: new Date().toISOString(),
+      };
+    }
+
+    try {
+      // basic auth, post method
+      const requestData = await fetch(process.env.WORKDAY_URL || '', {
+        method: 'POST',
+        headers: {
+          Authorization: `Basic ${Buffer.from(`${process.env.WORKDAY_USERNAME}:${process.env.WORKDAY_PASSWORD}`).toString('base64')}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const response = await requestData.json();
+
+      console.log('Response from Workday:', response);
+
+      return {
+        success: true,
+        message: 'Webhook received successfully',
+        timestamp: new Date().toISOString(),
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: 'Failed to send request to Workday',
+        timestamp: new Date().toISOString(),
+      };
+    }
   }
 
   @Post('summit')
