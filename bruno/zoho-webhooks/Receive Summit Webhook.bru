@@ -1,0 +1,33 @@
+meta {
+  name: Receive Summit Webhook
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/webhooks/zoho/summit
+  body: json
+  auth: none
+}
+
+headers {
+  x-webhook-key: {{webhook_key}}
+  origin: {{origin}}
+  content-type: application/json
+}
+
+body:json {
+  {
+    "event": "summit.webhook",
+    "timestamp": "2024-01-01T00:00:00Z",
+    "summit_data": {
+      "id": "summit-123",
+      "type": "summit",
+      "details": {
+        "name": "Test Summit Event",
+        "status": "active"
+      }
+    }
+  }
+}
+

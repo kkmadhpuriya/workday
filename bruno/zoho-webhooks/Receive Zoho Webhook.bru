@@ -1,0 +1,30 @@
+meta {
+  name: Receive Zoho Webhook
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/webhooks/zoho
+  body: json
+  auth: none
+}
+
+headers {
+  x-webhook-key: {{webhook_key}}
+  origin: {{origin}}
+  content-type: application/json
+}
+
+body:json {
+  {
+    "event": "webhook.test",
+    "timestamp": "2024-01-01T00:00:00Z",
+    "data": {
+      "id": "12345",
+      "type": "test",
+      "message": "Test webhook payload"
+    }
+  }
+}
+

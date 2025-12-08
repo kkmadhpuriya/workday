@@ -1,0 +1,25 @@
+meta {
+  name: Test Invalid Domain
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/webhooks/zoho
+  body: json
+  auth: none
+}
+
+headers {
+  x-webhook-key: {{webhook_key}}
+  origin: https://unauthorized-domain.com
+  content-type: application/json
+}
+
+body:json {
+  {
+    "event": "webhook.test",
+    "message": "This should fail with invalid domain"
+  }
+}
+
