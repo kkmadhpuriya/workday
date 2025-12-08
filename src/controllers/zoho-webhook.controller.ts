@@ -19,7 +19,7 @@ export class ZohoWebhookController {
     'zoho.eu',
   )
   async receiveWebhook(
-    @Body() body: { requests: { request_status: string } },
+    @Body() body: { requests: { request_status: string }; notifications: any },
     @Headers() headers: Record<string, string>,
   ) {
     // console.log('Received Zoho webhook:', {
@@ -61,6 +61,10 @@ export class ZohoWebhookController {
       // basic auth, post method
       const requestData = await fetch(process.env.WORKDAY_URL || '', {
         method: 'POST',
+        body: JSON.stringify({
+          requests: body.requests,
+          notifications: body.notifications,
+        }),
         headers: {
           Authorization: `Basic ${Buffer.from(`${process.env.WORKDAY_USERNAME}:${process.env.WORKDAY_PASS}`).toString('base64')}`,
           // 'Content-Type': 'application/json',
