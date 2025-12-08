@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{base_url}}/webhooks/zoho
+  url: {{base_url}}/webhooks/zoho/e-sign
   body: json
   auth: none
 }
@@ -20,11 +20,78 @@ body:json {
   {
     "event": "webhook.test",
     "timestamp": "2024-01-01T00:00:00Z",
-    "data": {
-      "id": "12345",
-      "type": "test",
-      "message": "Test webhook payload"
+    "requests": {
+      "request_status": "completed",
+      "owner_email": "owner@gmail.com",
+      "document_ids": [
+        {
+          "document_name": "This document is for testing",
+          "document_size": 20775,
+          "document_order": "0",
+          "is_nom151_present": false,
+          "is_editable": false,
+          "is_html_content_present": false,
+          "total_pages": 1,
+          "document_id": "137889000000048118"
+        }
+      ],
+      "self_sign": false,
+      "owner_id": "137889000000044007",
+      "request_name": "Testing Document 1",
+      "modified_time": 1764243302278,
+      "action_time": 1764243707458,
+      "is_deleted": false,
+      "is_sequential": true,
+      "org_id": "60058999498",
+      "owner_first_name": "xyz",
+      "request_type_name": "Others",
+      "owner_last_name": "abc",
+      "request_id": "137889000000048117",
+      "request_type_id": "137889000000000171",
+      "zsdocumentid": "DFBCB9ACA-RXG0NUQ4J-OQO2TO5QSTPJEISR79QJXZ0RRGIJ7VP0A",
+      "actions": [
+        {
+          "verify_recipient": true,
+          "action_type": "SIGN",
+          "action_id": "137889000000048131",
+          "is_revoked": false,
+          "recipient_email": "recipient1@gmail.com",
+          "is_embedded": false,
+          "signing_order": 1,
+          "verification_type": "EMAIL",
+          "recipient_name": "Recipient1",
+          "recipient_phonenumber": "",
+          "recipient_countrycode": "",
+          "action_status": "SIGNED"
+        },
+        {
+          "verify_recipient": true,
+          "action_type": "SIGN",
+          "action_id": "137889000000048135",
+          "is_revoked": false,
+          "recipient_email": "recipient2@gmail.com",
+          "is_embedded": false,
+          "signing_order": 2,
+          "verification_type": "EMAIL",
+          "recipient_name": "Recipient2",
+          "recipient_phonenumber": "",
+          "recipient_countrycode": "",
+          "action_status": "NOACTION"
+        }
+      ]
+    },
+    "notifications": {
+      "performed_by_email": "recipient1@gmail.com",
+      "performed_at": 1764243707519,
+      "country": "INDIA",
+      "activity": "Document successfully signed",
+      "operation_type": "RequestSigningSuccess",
+      "action_id": "137889000000048131",
+      "latitude": 26.34,
+      "performed_by_name": "Recipient1",
+      "signing_order": 1,
+      "ip_address": "223.237.153.52",
+      "longitude": 92.83
     }
   }
 }
-

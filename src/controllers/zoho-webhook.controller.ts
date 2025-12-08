@@ -10,7 +10,7 @@ import { AllowedAccess } from '../decorators/allowed-domains.decorator';
 
 @Controller('webhooks/zoho')
 export class ZohoWebhookController {
-  @Post()
+  @Post('e-sign')
   @HttpCode(HttpStatus.OK)
   @AllowedAccess(
     process.env.ZOHO_WEBHOOK_KEY || '',
@@ -62,12 +62,12 @@ export class ZohoWebhookController {
       const requestData = await fetch(process.env.WORKDAY_URL || '', {
         method: 'POST',
         headers: {
-          Authorization: `Basic ${Buffer.from(`${process.env.WORKDAY_USERNAME}:${process.env.WORKDAY_PASSWORD}`).toString('base64')}`,
-          'Content-Type': 'application/json',
+          Authorization: `Basic ${Buffer.from(`${process.env.WORKDAY_USERNAME}:${process.env.WORKDAY_PASS}`).toString('base64')}`,
+          // 'Content-Type': 'application/json',
         },
       });
 
-      const response = await requestData.json();
+      const response = await requestData.text();
 
       console.log('Response from Workday:', response);
 
@@ -77,6 +77,8 @@ export class ZohoWebhookController {
         timestamp: new Date().toISOString(),
       };
     } catch (error) {
+      console.log('Error from Workday:', error);
+
       return {
         success: false,
         message: 'Failed to send request to Workday',

@@ -1,0 +1,21 @@
+meta {
+  name: Workday E-Sign
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://wd3-e2-impl.workday.com/ccx/cc-cloud-repo/launches/INT121_Zoho_Sign_Inbound/INT121_Zoho_Sign_Inbound/StartHere
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: INT036_Zoho_Sign_ISU@diconium3
+  password: Workday@123
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
