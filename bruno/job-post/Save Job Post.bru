@@ -1,0 +1,30 @@
+meta {
+  name: Save Job Post
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/jobpost
+  body: json
+  auth: none
+}
+
+headers {
+  content-type: application/json
+}
+
+body:json {
+  [
+    {
+      "jobcode": "HS Unit Test Freeze/Unfreeze",
+      "designation": "Senior QA Engineer",
+      "jobdescription": "*Creation of test designs, test processes, test cases and test data.\n*Carry out testing as per the defined procedures.\n*Prepare all reports related to software testing carried out.\n*Validate security requirements during testing (e.g., input validation, authentication flows)\n*Conduct or support vulnerability testing\n*Report and track remediation of security-related bugs\n*Ensure test data is sanitized and non-sensitive",
+      "experience": "",
+      "job_url": "https://diconium6.wd3.myworkdayjobsimpl.com/Embitel_Technologies/job/Ahmedabad/HS-Unit-Test-Freeze-Unfreeze_JR100511",
+      "bu": "DH-CO-Emb DH-Embitel",
+      "posted": "Y",
+      "timestamp": "2025-12-10T00:04:04.625-08:00"
+    }
+  ]
+}
